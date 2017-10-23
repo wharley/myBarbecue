@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getList } from './companyActions'
+import { getList } from './orderActions'
 import { showUpdate, showDelete } from '../actions/globalActions'
 
-class CompanyList extends Component {
+class OrderList extends Component {
 
   componentWillMount() {
     this.props.getList()
@@ -14,13 +14,13 @@ class CompanyList extends Component {
     const list = this.props.list || []
     return list.map(bc => (
       <tr key={bc._id}>
-        <td>{bc.name}</td>
-        <td>{bc.cnpj}</td>
+        <td>{bc._id}</td>
+        <td>{bc.company.name}</td>
         <td>
-          <button className='btn btn-warning' onClick={() => this.props.showUpdate('companyForm', bc)}>
+          <button className='btn btn-warning' onClick={() => this.props.showUpdate('orderForm', bc)}>
             <i className='fa fa-pencil'></i>
           </button>
-          <button className='btn btn-danger' onClick={() => this.props.showDelete('companyForm', bc)}>
+          <button className='btn btn-danger' onClick={() => this.props.showDelete('orderForm', bc)}>
             <i className='fa fa-trash-o'></i>
           </button>
         </td>
@@ -34,8 +34,8 @@ class CompanyList extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Cnpj</th>
+              <th>Order</th>
+              <th>Client</th>
               <th className='table-actions'>Actions</th>
             </tr>
           </thead>
@@ -48,6 +48,6 @@ class CompanyList extends Component {
   }
 }
 
-const mapStateToProps = state => ({list: state.company.list})
+const mapStateToProps = state => ({list: state.order.list})
 const mapDispatchToProps = dispatch => bindActionCreators({getList, showUpdate, showDelete}, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyList)
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList)

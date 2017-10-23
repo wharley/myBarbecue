@@ -24,8 +24,8 @@ const login = (req, res, next) => {
             const token = jwt.sign(user, env.authSecret, {
                 expiresIn: "1 day"
             })
-            const { name, email } = user
-            res.json({ name, email, token })
+            const { _id, name, email } = user
+            res.json({ _id, name, email, token })
         } else {
             return res.status(400).send({ errors: ['Usuário/Senha inválidos'] })
         }
@@ -49,14 +49,6 @@ const signup = (req, res, next) => {
 
     if (!email.match(emailRegex)) {
         return res.status(400).send({ errors: ['O e-mail informado está inválido'] })
-    }
-
-    if (!password.match(passwordRegex)) {
-        return res.status(400).send({
-            errors: [
-                "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$ %) e tamanho entre 6-20."
-            ]
-        })
     }
 
     const salt = bcrypt.genSaltSync()
@@ -83,4 +75,31 @@ const signup = (req, res, next) => {
     })
 }
 
-module.exports = { login, signup, validateToken }
+const account = (req, res, next) => {
+
+    const name = req.body.name || ''
+    const email = req.body.email || ''
+    const password = req.body.password || ''
+    const confirmPassword = req.body.confirm_password || ''
+
+    if (!email.match(emailRegex)) {
+        return res.status(400).send({ errors: ['O e-mail informado está inválido'] })
+    }
+
+    const salt = bcrypt.genSaltSync()
+    const passwordHash = bcrypt.hashSync(password, salt)
+    if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
+        return res.status(400).send({ errors: ['Senhas não conferem.'] })
+    }
+
+    User.update(
+      { _id: req.body._id },
+      { $set: { name: req.body.name, email: req.body.email, password: passwordHash } }, (err, user) => {
+        if (err) return sendErrorsFromDB(res, err)
+
+        const { _id, name, email } = user
+        res.json({ _id, name, email })
+    })
+}
+
+module.exports = { login, signup, validateToken, account }

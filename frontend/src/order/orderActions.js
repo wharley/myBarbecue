@@ -5,9 +5,9 @@ import { showTabs, selectTab } from '../common/tab/tabActions'
 import consts from '../consts'
 
 export function getList() {
-  const request = axios.get(`${consts.API_URL}/companys`)
+  const request = axios.get(`${consts.API_URL}/orders`)
   return {
-    type: 'COMPANYS_FETCHED',
+    type: 'ORDERS_FETCHED',
     payload: request
   }
 }
@@ -17,7 +17,6 @@ export function create(values) {
 }
 
 export function update(values) {
-  console.log(values)
   return submit(values, 'put')
 }
 
@@ -28,7 +27,7 @@ export function remove(values) {
 function submit(values, method) {
   return dispatch => {
     const id = values._id ? values._id : ''
-    axios[method](`${consts.API_URL}/companys/${id}`, values)
+    axios[method](`${consts.API_URL}/orders/${id}`, values)
     .then(resp => {
       toastr.success('Success', 'Operation Successful.')
       dispatch(init())
@@ -44,6 +43,6 @@ export function init() {
     showTabs('tabList', 'tabCreate'),
     selectTab('tabList'),
     getList(),
-    initialize('companyForm')
+    initialize('orderForm')
   ]
 }

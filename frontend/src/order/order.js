@@ -9,12 +9,12 @@ import TabsHeader from '../common/tab/tabsHeader'
 import TabsContent from '../common/tab/tabsContent'
 import TabHeader from '../common/tab/tabHeader'
 import TabContent from '../common/tab/tabContent'
-import { init, create, update, remove } from './companyActions'
+import { init, create, update, remove } from './orderActions'
 
-import List from './companyList'
-import Form from './companyForm'
+import List from './orderList'
+import Form from './orderForm'
 
-class Company extends Component {
+class Order extends Component {
 
   componentWillMount() {
     this.props.init()
@@ -23,7 +23,7 @@ class Company extends Component {
   render() {
     return (
       <div>
-        <ContentHeader title='Company' small='Register' />
+        <ContentHeader title='Order' small='Register' />
         <Content>
           <Tabs>
             <TabsHeader>
@@ -59,4 +59,4 @@ class Company extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators({
   init, create, update, remove
 }, dispatch)
-export default connect(null, mapDispatchToProps)(Company)
+export default connect(null, mapDispatchToProps)(Order)

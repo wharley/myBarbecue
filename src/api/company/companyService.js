@@ -10,6 +10,8 @@ Company.before('post', validateCnpj).before('put', validateCnpj)
 
 function validateCnpj(req, res, next) {
 
+  if (!req.body.cnpj || !req.body.name) return res.status(400).send({errors: ['Cnpj/Name empty! Please fill.']})
+
   const cnpj = req.body.cnpj.replace(/[^\d]+/g,'')
 
   if (cnpj == '')

@@ -15,7 +15,10 @@ module.exports = function (server) {
     Company.register(protectedApi, '/companys')
 
     const Order = require('../api/order/orderService')
-    Order.register(protectedApi, '/orders')    
+    Order.register(protectedApi, '/orders')
+
+    const User = require('../api/user/authService')
+  	protectedApi.put('/users', User.account)    
 
     /*
      * Route open

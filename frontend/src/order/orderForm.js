@@ -3,19 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 
-import { init } from './companyActions'
+import { init } from './orderActions'
 import LabelAndInput from '../common/form/labelAndInput'
 
-class CompanyForm extends Component {
+class OrderForm extends Component {
   render() {
     const { handleSubmit, readOnly } = this.props
     return (
       <form role='form' onSubmit={handleSubmit}>
         <div className='box-body'>
-          <Field name='name' component={LabelAndInput} readOnly={readOnly}
-            label='Name' cols='12 4' placeholder='Enter the name' />
-          <Field name='cnpj' component={LabelAndInput} type='text' readOnly={readOnly}
-            label='Cnpj' cols='12 4' placeholder='Enter the cnpj' />
+
         </div>
         <div className='box-footer'>
           <button type='submit' className={`btn btn-${this.props.submitClass}`}>
@@ -29,7 +26,7 @@ class CompanyForm extends Component {
   }
 }
 
-CompanyForm = reduxForm({form: 'companyForm', destroyOnUnmount: false})(CompanyForm)
-const selector = formValueSelector('companyForm')
+OrderForm = reduxForm({form: 'orderForm', destroyOnUnmount: false})(OrderForm)
+const selector = formValueSelector('orderForm')
 const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch)
-export default connect(null, mapDispatchToProps)(CompanyForm)
+export default connect(null, mapDispatchToProps)(OrderForm)

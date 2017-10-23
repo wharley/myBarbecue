@@ -9,12 +9,11 @@ import TabsHeader from '../common/tab/tabsHeader'
 import TabsContent from '../common/tab/tabsContent'
 import TabHeader from '../common/tab/tabHeader'
 import TabContent from '../common/tab/tabContent'
-import { init, create, update, remove } from './companyActions'
+import { init, update } from './accountActions'
 
-import List from './companyList'
-import Form from './companyForm'
+import Form from './accountForm'
 
-class Company extends Component {
+class Account extends Component {
 
   componentWillMount() {
     this.props.init()
@@ -23,30 +22,17 @@ class Company extends Component {
   render() {
     return (
       <div>
-        <ContentHeader title='Company' small='Register' />
+        <ContentHeader title='Account' small='Register' />
         <Content>
           <Tabs>
             <TabsHeader>
-              <TabHeader label='List' icon='bars' target='tabList' />
-              <TabHeader label='Include' icon='plus' target='tabCreate' />
               <TabHeader label='Changer' icon='pencil' target='tabUpdate' />
               <TabHeader label='Delete' icon='trash-o' target='tabDelete' />
             </TabsHeader>
             <TabsContent>
-              <TabContent id='tabList'>
-                <List />
-              </TabContent>
-              <TabContent id='tabCreate'>
-                <Form onSubmit={this.props.create}
-                  submitLabel='Include' submitClass='primary' />
-              </TabContent>
               <TabContent id='tabUpdate'>
                 <Form onSubmit={this.props.update}
                   submitLabel='Change' submitClass='info' />
-              </TabContent>
-              <TabContent id='tabDelete'>
-                <Form onSubmit={this.props.remove} readOnly={true}
-                  submitLabel='Delete' submitClass='danger' />
               </TabContent>
             </TabsContent>
           </Tabs>
@@ -57,6 +43,6 @@ class Company extends Component {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  init, create, update, remove
+  init, update
 }, dispatch)
-export default connect(null, mapDispatchToProps)(Company)
+export default connect(null, mapDispatchToProps)(Account)

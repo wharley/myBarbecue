@@ -5,7 +5,8 @@
   "main": "src/loader.js",
   "scripts": {
     "dev": "nodemon",
-    "production": "pm2 start src/loader.js --name my-barbecue"
+    "production": "pm2 start src/loader.js --name my-barbecue",
+    "test": "./node_modules/.bin/mocha ./test/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,11 @@
     "pm2": "^2.1.5"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nock": "^9.0.24",
+    "nodemon": "^1.11.0",
+    "should": "^13.1.2",
+    "supertest": "^3.0.0"
   }
 }
