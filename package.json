@@ -2,10 +2,10 @@
   "name": "my-barbecue",
   "version": "1.0.0",
   "description": "",
-  "main": "src/loader.js",
+  "main": "loader.js",
   "scripts": {
     "dev": "nodemon",
-    "production": "pm2 start src/loader.js --name my-barbecue",
+    "production": "pm2 start loader.js --name my-barbecue",
     "test": "./node_modules/.bin/mocha ./test/*.test.js"
   },
   "keywords": [],

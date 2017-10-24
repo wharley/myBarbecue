@@ -1,3 +1,3 @@
 'use sctrict'
-require('./config/server')
+require('./server')
 require('./config/database')

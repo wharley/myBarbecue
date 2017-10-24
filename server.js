@@ -1,10 +1,11 @@
 'use strict'
-const port = 3007
+const port = 3008
 
+const path = require('path')
 const bodyParser = require('body-parser')
 const express = require('express')
 const server = express()
-const allowCors = require('./cors')
+const allowCors = require('./config/cors')
 
 server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
