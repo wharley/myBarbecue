@@ -1,17 +1,12 @@
 {
   "name": "my-barbecue",
   "version": "1.0.0",
-  "license": "MIT",
-  "engines": {
-    "node": "6.11.1",
-    "npm": "3.10.10"
-  },
+  "description": "",
+  "main": "src/loader.js",
   "scripts": {
-    "start": "node src/loader.js",
     "dev": "nodemon",
     "production": "pm2 start src/loader.js --name my-barbecue",
-    "test": "./node_modules/.bin/mocha ./test/*.test.js",
-    "postinstall": "./frontend/webpack --progress -p"
+    "test": "./node_modules/.bin/mocha ./test/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -25,9 +20,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.10.4",
     "node-restful": "^0.2.5",
-    "pm2": "^2.1.5",
-    "mongodb": "^3.4.9",
-    "webpack": "^1.14.0"
+    "pm2": "^2.1.5"
   },
   "devDependencies": {
     "chai": "^4.1.2",
